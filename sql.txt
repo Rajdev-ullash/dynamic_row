@@ -1,0 +1,26 @@
+CREATE TABLE divisions (
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+)ENGINE=INNODB;
+
+INSERT INTO divisions (name) VALUES ('Dhaka'),('Chattogram'),('Rajshahi'),('Khulna'),('Barishal'),('Sylet');
+
+
+CREATE TABLE districts (
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT
+    name varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+    division_id int,
+    FOREIGN KEY (division_id) REFERENCES divisions(id)
+)
+
+INSERT INTO districts (name,division_id) VALUES ('Gazipur',1),('Narayanganj',1),('Rangamati',2),('Bandarban',2),('Bogura',3),('Natore',3);
+
+CREATE TABLE employees (
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+    email varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+    division_id int,
+    district_id int,
+    FOREIGN KEY (division_id) REFERENCES divisions(id),
+    FOREIGN KEY (district_id) REFERENCES districts(id)
+)
